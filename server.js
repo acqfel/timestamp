@@ -31,8 +31,36 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get('/api/timestamp/',function(req, res){
+  
+  let unix;
+  let utc;
+  
+  let date = new Date();
+
+  unix = date.getTime();
+  utc = date.toUTCString();
+  
+  let msg = { "unix": unix, "natural": utc };
+
+  res.json(msg);
+});
+
 app.get('/api/timestamp/:date_string',function(req, res){
-  let msg = {echo: req.params.date_string};
+  let param = req.params.date_string;
+  
+  let unix = null;
+  let utc = "Invalid Date";
+
+  if ( param !== "Invalid Date") {
+    let date = new Date(param);
+
+    unix = date.getTime();
+    utc = date.toUTCString();
+  }
+  
+  let msg = { "unix": unix, "natural": utc };
+
   res.json(msg);
 });
 
