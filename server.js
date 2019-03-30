@@ -24,11 +24,18 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+/*** API endpoints ***/
 
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
+
+app.get('/api/timestamp/:date_string',function(req, res){
+  let msg = {echo: req.params.date_string};
+  res.json(msg);
+});
+
 
 
 
